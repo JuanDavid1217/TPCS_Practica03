@@ -79,8 +79,8 @@ public class TPCS_Practica03 {
         DetVenta detalle1=new DetVenta();
         detalle1.setProducto(daoProducto.findByID(3L));
         detalle1.setCantidad(2);
-        detalle1.setDescripcion(detalle1.getProducto().getDescripcion());
-        detalle1.setPrecio(detalle1.getProducto().getPrecio());
+        //detalle1.setDescripcion(detalle1.getProducto().getDescripcion());
+        //detalle1.setPrecio(detalle1.getProducto().getPrecio());
         List<DetVenta>detalles=new ArrayList<>();
         detalles.add(detalle1);
         
@@ -113,7 +113,7 @@ public class TPCS_Practica03 {
         //venta.setDetalles(detalles);
         
         //daoVenta.update(venta, 1L);
-        //daoVenta.delete(2L);
+        //daoVenta.delete(3L);
         
        //System.out.println(daoVenta.delete(5L));
         

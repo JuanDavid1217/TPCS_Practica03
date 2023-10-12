@@ -67,6 +67,8 @@ public class DetVenta {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+        this.descripcion=producto.getDescripcion();
+        this.precio=producto.getPrecio();
     }
 
     public int getCantidad() {
