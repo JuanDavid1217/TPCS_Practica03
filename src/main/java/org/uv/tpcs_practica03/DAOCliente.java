@@ -34,7 +34,7 @@ public class DAOCliente implements IDAOGeneral<Cliente, Long>{
         boolean pase=false;
         Cliente cliente=session.get(Cliente.class, id);
         if(cliente!=null){
-            session.delete(id);
+            session.delete(cliente);
             transaction.commit();
             pase=true;
         }
@@ -48,7 +48,7 @@ public class DAOCliente implements IDAOGeneral<Cliente, Long>{
         Transaction transaction=session.beginTransaction();
         Cliente cliente=session.get(Cliente.class, id);
         if(cliente!=null){
-            session.update(t);
+            session.merge(t);
             transaction.commit();
         }
         

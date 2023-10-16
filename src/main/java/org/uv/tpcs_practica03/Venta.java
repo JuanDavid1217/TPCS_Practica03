@@ -37,7 +37,7 @@ public class Venta {
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
     
-    @OneToMany(mappedBy="venta", cascade={CascadeType.REMOVE, CascadeType.MERGE}, orphanRemoval=true, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="venta", cascade={CascadeType.REMOVE, CascadeType.MERGE}, /*orphanRemoval=true,*/ fetch=FetchType.EAGER)
     private List<DetVenta> detalles;
 
     @Column

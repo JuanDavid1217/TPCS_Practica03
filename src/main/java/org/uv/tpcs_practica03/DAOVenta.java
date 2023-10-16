@@ -25,7 +25,7 @@ public class DAOVenta implements IDAOGeneral<Venta, Long>{
             session.save(detalle);
             Producto producto=session.get(Producto.class, detalle.getProducto().getProductoId());
             producto.setExistencia(producto.getExistencia()-detalle.getCantidad());
-            session.update(producto);
+            session.merge(producto);
             
             /*Faltan validar reglas del negocio*/
         }
@@ -55,11 +55,22 @@ public class DAOVenta implements IDAOGeneral<Venta, Long>{
         Transaction transaction=session.beginTransaction();
         Venta venta=session.get(Venta.class, id);
         if(venta!=null){
+            Producto pro;
+            for(DetVenta detalle:venta.getDetalles()){
+                pro=session.get(Producto.class, detalle.getProducto().getProductoId());
+                pro.setExistencia(pro.getExistencia()+detalle.getCantidad());
+                session.merge(pro);
+            }
             for(DetVenta detalle:t.getDetalles()){
                 detalle.setVenta(t);
             /*Faltan validar reglas del negocio*/
             }
             session.merge(t);
+            for(DetVenta detalle:t.getDetalles()){
+                pro=session.get(Producto.class, detalle.getProducto().getProductoId());
+                pro.setExistencia(pro.getExistencia()-detalle.getCantidad());
+                session.merge(pro);
+            }
             /*for(DetVenta detalleregistrado:venta.getDetalles()){
                 for(DetVenta detalle:t.getDetalles()){
                     if(detalleregistrado.getProducto().getProductoId()==detalle.getProducto().getProductoId()){

@@ -51,7 +51,7 @@ public class DAOProducto implements IDAOGeneral<Producto, Long>{
         
         Producto pro=session.get(Producto.class, id);
         if(pro!=null){
-            session.update(t);
+            session.merge(t);
             transaction.commit();
         }
         
